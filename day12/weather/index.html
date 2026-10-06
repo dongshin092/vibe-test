@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>세계 날씨</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/cities.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+
+    <!-- ① 헤더 -->
+    <header class="brand">
+      <div class="brand-icon" aria-hidden="true"><i class="fa-solid fa-cloud-sun"></i></div>
+      <div>
+        <h1>세계 날씨</h1>
+        <p>대륙을 고르고 지도에서 도시를 눌러보세요</p>
+      </div>
+    </header>
+
+    <!-- ② 대륙 칩 -->
+    <nav class="chips" id="continentChips" aria-label="대륙 선택"></nav>
+
+    <!-- ③ 지도 -->
+    <section class="panel map-panel" aria-label="세계지도">
+      <div id="map"></div>
+    </section>
+
+    <!-- ④ ⑤ 대시보드 -->
+    <section id="dashboard" aria-live="polite">
+
+      <div class="panel hero">
+        <img id="weatherIcon" class="hero-icon" src="" alt="" hidden>
+        <div class="hero-icon-skeleton skeleton" id="weatherIconSkeleton"></div>
+        <div class="hero-info">
+          <p class="hero-city" id="cityName">-</p>
+          <p class="hero-desc" id="cityDesc">-</p>
+        </div>
+        <div class="hero-temp">
+          <b id="heroTemp">-</b>
+          <small>
+            <span class="spinner-border spinner-border-sm" id="loadingSpinner" role="status" hidden></span>
+            <span id="localTime">-</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="panel card-w card-temp">
+          <div class="ic g-temp" aria-hidden="true"><i class="fa-solid fa-temperature-half"></i></div>
+          <div class="lb">현재 온도</div>
+          <div class="val" data-field="temp">-</div>
+          <div class="sub" data-field="feels">-</div>
+        </article>
+        <article class="panel card-w">
+          <div class="ic g-range" aria-hidden="true"><i class="fa-solid fa-arrows-up-down"></i></div>
+          <div class="lb">최고 / 최저</div>
+          <div class="val" data-field="range">-</div>
+          <div class="range-bar" aria-hidden="true"></div>
+          <div class="sub">향후 24시간 기준</div>
+        </article>
+        <article class="panel card-w">
+          <div class="ic g-wind" aria-hidden="true"><i class="fa-solid fa-wind"></i></div>
+          <div class="lb">풍속</div>
+          <div class="val" data-field="windSpeed">-</div>
+          <div class="sub" data-field="windLevel">-</div>
+        </article>
+        <article class="panel card-w">
+          <div class="ic g-dir" aria-hidden="true"><i class="fa-regular fa-compass"></i></div>
+          <div class="lb">풍향</div>
+          <div class="val" data-field="windDir">-</div>
+          <div class="sub" data-field="windDeg">-</div>
+          <div class="compass" aria-hidden="true"><i class="fa-solid fa-arrow-up" id="windArrow"></i></div>
+        </article>
+        <article class="panel card-w">
+          <div class="ic g-hum" aria-hidden="true"><i class="fa-solid fa-droplet"></i></div>
+          <div class="lb">습도</div>
+          <div class="val" data-field="humidity">-</div>
+          <div class="hum-bar" aria-hidden="true"><i id="humidityBar"></i></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 안내 / 에러 -->
+    <section class="panel notice" id="notice" role="alert" hidden>
+      <div class="notice-icon" aria-hidden="true"><i class="fa-solid fa-circle-exclamation" id="noticeIcon"></i></div>
+      <div class="notice-body">
+        <p class="notice-title" id="noticeTitle"></p>
+        <p class="notice-text" id="noticeText"></p>
+      </div>
+      <button type="button" class="btn retry-btn" id="retryBtn" hidden>
+        <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 다시 시도
+      </button>
+    </section>
+
+  </main>
+</body>
+</html>
